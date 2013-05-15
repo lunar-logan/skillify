@@ -1,0 +1,92 @@
+<script>
+    DEBUG = true; // Turn it off in production environment
+</script>
+<div id="canvas">
+  <div id="ui">
+    <input type="text" id="query">
+    <input type="button" name="Search" value="Search" onclick="search();">
+  </div>
+  <div id="result">
+    <div id="skills"></div>
+    <div id="top-repos"></div>
+  </div>
+</div>
+<script>
+    var paper = null;
+    $(document).ready(function () {
+        //Do some startup tasks
+        //alert("Hello World!");
+        var queryString = $('#query').val();
+        //paper = new Raphael(document.getElementById('skills'), 600, 240);
+        ///var circle = paper.circle(100, 100, 100);
+        if (queryString != null && queryString.length > 0) search();
+    });
+    //Api begins below
+    /**
+     * This function will be called when the user clicks on <b>Search</b> button
+     */
+    function search() {
+        var queryString = $('#query').val();
+        if (DEBUG) alert("Reading the query: " + queryString);
+        //Now make an ajax request to the server
+        $.ajax({
+            url: "/skillify.json?uname=" + queryString,
+            dataType: "json",
+            type: "GET",
+            success: function (v) {
+                if (DEBUG) alert(JSON.stringify(v));
+                $('#skills').before(__form_user(v.user));
+                $('#skills').append(__form_skill_stack(v.skills, 5));
+                $('#top-repos').append(__form_repos(v.top_repos));
+                ///$('#result').append('<div>' + JSON.stringify(v) + '</div>');
+            },
+            error: function (v) {
+                if (DEBUG) alert(JSON.stringify(v));
+            }
+        });
+    }
+
+    function __form_user(user) {
+        userDiv = '<div id="user-info">' +
+                '<div id="initials">' + user.name +
+
+                '<div><a href="https://www.github.com/' + user.username + '">' + user.username + '</a></div>' +
+
+                '</div>' +
+                '<img src="' + "https://secure.gravatar.com/avatar/" + user.gravatar_id + '?s=200">' + '</img>' +
+
+                '</div>';
+        return userDiv;
+
+    }
+    function __form_skill_stack(skills, scale) {
+        //alert(JSON.stringify(skills));
+        skill = "";
+        for (i = 0; i < skills.length; i++) {
+            name = skills[i][0];
+            rating = skills[i][1];
+            if (rating === 'Unrated' || rating == null)
+                skill += '<span id="skill-tag">' + name + ": " + "Unrated" + "</span>";
+            else
+                skill += '<span id="skill-tag">' + name + ": " + Math.round(rating * 100) / 100 + "/" + scale + "</span>";
+
+        }
+        return skill;
+
+    }
+    function __form_repos(repos) {
+        repo = "";
+        for (i = 0; i < repos.length; i++) {
+            r = repos[i];
+            s = '<div id="repo">' +
+                    '<div id="title">' + r.name + '</div>' +
+                    '<div>' + r.description + '</div>' +
+
+                    '</div>';
+            repo += s;
+
+        }
+        return repo;
+    }
+
+</script>
