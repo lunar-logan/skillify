@@ -1,0 +1,70 @@
+// Place all the styles related to the page controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#user-info {
+  //background: dimgrey;
+  padding: 8px;
+  border: solid 1px #41413e;
+  min-height: 210px;
+  width: 600px;
+}
+
+#user-info img {
+  float: left;
+}
+
+#user-info #initials {
+  float: right;
+  /*border: solid 1px;*/
+  width: 380px;
+  font-size: 64px;
+  color: #181816;
+  //font-weight: bold;
+  font-family: 'Josefin Slab', serif;
+}
+
+#user-info #initials a {
+  text-decoration: none;
+  color: brown;
+  font-size: 30px;
+}
+
+#user-info #initials a:hover {
+  text-decoration: underline;
+}
+
+#skills {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border: solid 1px dimgrey;
+}
+
+#skills #skill-tag {
+  background: #181816;
+  border-radius: 4px;
+  font-family: 'Josefin Slab', serif;
+  font-size: 24px;
+  padding: 12px;
+  margin: 16px;
+  color: dimgrey;
+}
+
+#top-repos {
+  border: solid 1px;
+  padding: 16px;
+}
+
+#top-repos #repo {
+  background: #181816;
+  border-radius: 4px;
+  font-family: 'Josefin Slab', serif;
+  color: dimgrey;
+  font-size: 14px;
+  padding: 8px;
+  margin: 8px;
+}
+#top-repos #repo #title {
+  font-size: 24px;
+ // border-bottom: solid 1px dimgrey;
+}
