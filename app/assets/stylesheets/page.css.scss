@@ -1,7 +1,19 @@
 // Place all the styles related to the page controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#canvas {
+  width: 960px;
+  margin-left:auto;
+  margin-right:auto;
+  //width:70%;
+}
+#query {
+  border: solid 1px #6a6a66;
+  width: 600px;
+  padding: 8px;
 
+  margin-bottom: 16px;
+}
 #user-info {
   //background: dimgrey;
   padding: 8px;
@@ -36,35 +48,73 @@
 
 #skills {
   padding-top: 16px;
-  padding-bottom: 16px;
-  border: solid 1px dimgrey;
+  //border: solid 1px dimgrey;
+  min-height: 140px;
+}
+
+#skills #header {
+  font-family: 'Josefin Slab', serif;;
+  border-bottom: solid 1px #c6c5bb;
+  font-size: 52px;
+  margin-bottom: 24px;
 }
 
 #skills #skill-tag {
-  background: #181816;
-  border-radius: 4px;
+  position: relative;
+  background: #cdecff;
+  //border-radius: 4px;
   font-family: 'Josefin Slab', serif;
   font-size: 24px;
   padding: 12px;
-  margin: 16px;
-  color: dimgrey;
+  //margin-top: 136px;
+  //margin: 12px;
+  margin-right: 8px;
+  margin-left: 12px;
+  color: #171713;
 }
 
 #top-repos {
-  border: solid 1px;
-  padding: 16px;
+  //border: solid 1px;
+  //padding: 16px;
 }
 
 #top-repos #repo {
-  background: #181816;
-  border-radius: 4px;
+  border-bottom: solid 1px #c6c5bb;
   font-family: 'Josefin Slab', serif;
   color: dimgrey;
   font-size: 14px;
   padding: 8px;
   margin: 8px;
+  word-break: break-all;
 }
+
 #top-repos #repo #title {
-  font-size: 24px;
- // border-bottom: solid 1px dimgrey;
+  font-size: 28px;
+  padding-bottom: 6px;
+  // border-bottom: solid 1px dimgrey;
+}
+
+#top-repos #repo #title a {
+  text-decoration: none;
+  color: brown;
+}
+
+#top-repos #header {
+  font-family: 'Josefin Slab', serif;;
+  border-bottom: solid 1px #c6c5bb;
+  font-size: 52px;
+}
+
+#top-repos #repo #title a:hover {
+  text-decoration: underline;
+}
+
+#top-repos #repo #stats {
+  margin-top: 8px;
+  padding: 2px;
+}
+
+#top-repos #repo #stats a {
+  text-decoration: none;
+  color: brown;
 }

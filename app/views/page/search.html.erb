@@ -3,7 +3,7 @@
 </script>
 <div id="canvas">
   <div id="ui">
-    <input type="text" id="query">
+    <input type="text" id="query" placeholder="Identify skills of...">
     <input type="button" name="Search" value="Search" onclick="search();">
   </div>
   <div id="result">
@@ -34,6 +34,9 @@
             dataType: "json",
             type: "GET",
             success: function (v) {
+                $('#result').empty();
+                $('#result').append('<div id="skills"></div>');
+                $('#result').append('<div id="top-repos"></div>');
                 if (DEBUG) alert(JSON.stringify(v));
                 $('#skills').before(__form_user(v.user));
                 $('#skills').append(__form_skill_stack(v.skills, 5));
@@ -71,7 +74,7 @@
                 skill += '<span id="skill-tag">' + name + ": " + Math.round(rating * 100) / 100 + "/" + scale + "</span>";
 
         }
-        return skill;
+        return '<div id="header">Skills Rating</div>' + skill;
 
     }
     function __form_repos(repos) {
@@ -79,14 +82,22 @@
         for (i = 0; i < repos.length; i++) {
             r = repos[i];
             s = '<div id="repo">' +
-                    '<div id="title">' + r.name + '</div>' +
+                    '<div id="title"><a href="https://github.com/">' + r.name + '</a></div>' +
                     '<div>' + r.description + '</div>' +
-
+                    '<div id="stats">' +
+                    '<a>Forks</a> ' + r.forks_count +
+                    ' &bull; ' + "<a>Collaborators</a> " + r.collaborators_count +
+                    ' &bull; ' + "<a>Contributors </a>" + r.contributors_count +
+                    ' &bull; ' + "<a> Watchers</a> " + r.watchers_count +
+                    ' &bull; ' + "<a>R-Score</a> " + Math.round(r.score) +
+                    ' &bull; ' + "<a>Issues</a> " + r.open_issues_count +
+                    ' &bull; ' + "<a>Language</a> " + r.language +
+                    '</div>' +
                     '</div>';
             repo += s;
 
         }
-        return repo;
+        return '<div id="header">Top Repositories</div>' + repo;
     }
 
 </script>
