@@ -3,7 +3,7 @@
 </script>
 <div id="canvas">
   <div id="ui">
-    <input type="text" id="query" placeholder="Identify skills of...">
+    <input type="text" id="query" placeholder="Whats her github username...">
     <input type="button" name="Search" value="Search" onclick="search();">
   </div>
   <div id="result">
@@ -69,9 +69,9 @@
             name = skills[i][0];
             rating = skills[i][1];
             if (rating === 'Unrated' || rating == null)
-                skill += '<span id="skill-tag">' + name + ": " + "Unrated" + "</span>";
+                skill += '<div id="skill-tag">' + name + ": " + "Unrated" + "</div>";
             else
-                skill += '<span id="skill-tag">' + name + ": " + Math.round(rating * 100) / 100 + "/" + scale + "</span>";
+                skill += '<div id="skill-tag">' + name + ": " + Math.round(rating * 100) / 100 + "/" + scale + "</div>";
 
         }
         return '<div id="header">Skills Rating</div>' + skill;

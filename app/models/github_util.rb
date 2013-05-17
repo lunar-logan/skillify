@@ -21,11 +21,11 @@ class GithubUtil
   def repo(owner, repo_name)
     url = "https://api.github.com/repos/"+owner + "/" + repo_name
     repo = JSON.load open(url, "Authorization" => "token " + @oauth_tok).read
-    #commits = JSON.load open(repo["commits_url"][0..-7])
-    repo["commits_count"] = 0 #commits.length
-    collab = JSON.load open(repo["collaborators_url"][0..-16])
+    commits = JSON.load open(repo["commits_url"][0..-7], "Authorization" => "token " + @oauth_tok).read
+    repo["commits_count"] = commits.length
+    collab = JSON.load open(repo["collaborators_url"][0..-16], "Authorization" => "token " + @oauth_tok).read
     repo["collaborators_count"] = collab.length
-    contrib = JSON.load open(repo["contributors_url"])
+    contrib = JSON.load open(repo["contributors_url"], "Authorization" => "token " + @oauth_tok).read
     repo["contributors_count"] = contrib.length
     return repo.to_json
   end
@@ -43,15 +43,16 @@ class GithubUtil
     repos = JSON.load open(url, "Authorization" => "token " + @oauth_tok).read
     repos.each do |repo|
       begin
-        #commits = JSON.load open(repo["commits_url"][0..-7])
-        repo["commits_count"] = 0 #commits.length
-        collab = JSON.load open(repo["collaborators_url"][0..-16])
+        commits = JSON.load open(repo["commits_url"][0..-7], "Authorization" => "token " + @oauth_tok).read
+        repo["commits_count"] = commits.length
+        collab = JSON.load open(repo["collaborators_url"][0..-16], "Authorization" => "token " + @oauth_tok).read
         repo["collaborators_count"] = collab.length
-        contrib = JSON.load open(repo["contributors_url"])
+        contrib = JSON.load open(repo["contributors_url"], "Authorization" => "token " + @oauth_tok).read
         repo["contributors_count"] = contrib.length
-      rescue OpenURI::HTTPError
-        #raise (repo["collaborators_url"][0..-16] + " " + repo["contributors_url"]).to_json
+      rescue
+        #raise repo["collaborators_url"][0..-16] + " " + repo["contributors_url"]
       end
+
     end
     return repos.to_json
   end

@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
                      :name => info["name"],
                      :git_id => info["id"],
                      :gravatar_id => info["gravatar_id"],
-                     :followers => info["followers_count"],
+                     :followers => info["followers"],
                      :following => info["following"],
                      :public_repos => info["public_repos"],
                      :public_gists => info["public_gists"],
@@ -103,7 +103,7 @@ class ApplicationController < ActionController::Base
     f1 = repo["commits_count"].to_i
     beta = (a1 * 16 + b1 * 16 + c1 * 8 + d1 * 28 + e1 * 28 + f1*2)/6.0
 
-    rho = -(alpha-beta)/alpha
+    rho = -((alpha-beta).abs/alpha)
     val = (1.0 - (1.0/(1.0 + exp ** rho))) * 10.0
     return val
   end
@@ -129,7 +129,7 @@ class ApplicationController < ActionController::Base
 
   def get_top_x_repos_of_user(user, x=10)
     repos = get_top_x_repos_of_user_from_cache user
-    if !repos.nil?
+    if !repos.nil? and !repos.blank?
       return repos
     end
     git = GithubUtil.new "ac80650e2f9d292fda4c539649f16f4e12aa842c"
@@ -160,8 +160,9 @@ class ApplicationController < ActionController::Base
     user = User.find_by_username(usr)
     git = GithubUtil.new "ac80650e2f9d292fda4c539649f16f4e12aa842c"
     if user.nil? or user.blank?
-      val = git.user(usr)
-      user = JSON.load(val)
+      val = git.user usr
+      user = JSON.load val
+      user["username"] = user["login"]
       add_user user
     end
     return user
@@ -180,10 +181,10 @@ class ApplicationController < ActionController::Base
     return user
   end
 
-  def skillify(skillSet = ["Java", "Python", "Ruby", "JavaScript", "C"])
+  def skillify(skillSet = ["Java", "Python", "Ruby", "JavaScript", "C", "Objective-C"])
     username = params[:uname]
     if username.nil?
-      skillRating = "Fuck you _|_"
+      skillRating = "If your are good at something, never do it for free..."
     else
       #raise username.to_json
       @user = get_user_info_by_username username
@@ -197,13 +198,16 @@ class ApplicationController < ActionController::Base
 
         @repos.each do |repo|
           if repo["language"] == skill
-            skillScore += rate_repo_by_skill(repo, topRepo)
+            a = rate_repo_by_skill(repo, topRepo)
+            if a > skillScore
+              skillScore = a
+            end
             count += 1
           end
         end
 
         if count > 0
-          sk << [skill, skillScore/count]
+          sk << [skill, skillScore] #/count]
         else
           sk << [skill, "Unrated"]
         end
@@ -211,8 +215,8 @@ class ApplicationController < ActionController::Base
       end
       skillRating["skills"] = sk
       #raise skillRating.to_json
-      skillRating["user"] = get_user_info_by_username(username)
-      skillRating["top_repos"] = get_top_x_repos_of_user(username)
+      skillRating["user"] = @user #get_user_info_by_username(username)
+      skillRating["top_repos"] = @repos #get_top_x_repos_of_user(username)
     end
 
     respond_to do |format|
