@@ -1,0 +1,10 @@
+<div ng-controller="queryController">
+  <form ng-submit="submit()">
+    <input type="text" name="text" ng-model="query" placeholder="Tell me a Github username">
+    <input type="submit" value="Submit" id="submit">
+  </form>
+  <pre>{{list}}</pre>
+  <div id="results">
+     {{res}}
+  </div>
+</div>

@@ -38,3 +38,4 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'github_api'
+gem "angularjs-rails", "~> 1.0.6.2"

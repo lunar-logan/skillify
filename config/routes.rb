@@ -1,7 +1,7 @@
 Skillify::Application.routes.draw do
   match '/look', to: 'application#lookup'
   match '/skillify', to: 'application#skillify'
-  match '/searchskill' => 'page#search'
+  match '/searchskill' => 'page#look'
 
 
   # The priority is based upon order of creation:
