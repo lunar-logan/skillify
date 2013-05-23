@@ -181,7 +181,7 @@ class ApplicationController < ActionController::Base
     return user
   end
 
-  def skillify(skillSet = ["Java", "Python", "Ruby", "JavaScript", "C", "Objective-C"])
+  def skillify(skillSet = ["Java", "Python", "Ruby", "JavaScript", "C", "Objective-C", "PHP"])
     username = params[:uname]
     if username.nil?
       skillRating = "If your are good at something, never do it for free..."
