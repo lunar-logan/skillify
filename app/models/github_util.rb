@@ -2,7 +2,7 @@ require 'open-uri'
 
 class GithubUtil
   # To change this template use File | Settings | File Templates.
-  def initialize(oauth_token)
+  def initialize(oauth_token=nil)
     @oauth_tok = "53cb12ea8d762f092fde3e7715f2604339f891f0"
   end
 

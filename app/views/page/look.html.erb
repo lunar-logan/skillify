@@ -5,6 +5,12 @@
   </form>
   <pre>{{list}}</pre>
   <div id="results">
-     {{res}}
+    {{res}}
+    <div>
+      <div ng-repeat="repo in repos | orderBy:score">
+        {{repo.name}}
+        <p>{{repo.description}}</p>
+      </div>
+    </div>
   </div>
 </div>
