@@ -2,6 +2,7 @@ Skillify::Application.routes.draw do
   match '/look', to: 'application#lookup'
   match '/skillify', to: 'application#skillify'
   match '/searchskill' => 'page#look'
+  match '/viewconfig' => 'page#keys.json'
 
 
   # The priority is based upon order of creation:

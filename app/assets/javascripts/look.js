@@ -9,7 +9,9 @@ function queryController($scope, $http) {
             $scope.list.push(this.query);
             this.query = '';
             $http.get('/skillify.json?uname=' + queryString).then(function (res) {
-               $scope.res = res;
+                if(res["status"] == 200) {
+                    $scope.res="Found !!";
+                }
             });
         }
     }
