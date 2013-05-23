@@ -1,16 +1,59 @@
 <div ng-controller="queryController">
-  <form ng-submit="submit()">
-    <input type="text" name="text" ng-model="query" placeholder="Tell me a Github username">
-    <input type="submit" value="Submit" id="submit">
-  </form>
-  <pre>{{list}}</pre>
-  <div id="results">
-    {{res}}
-    <div id=result>
-      <div id="repo" ng-repeat="repo in repos | orderBy:score">
-        {{repo.name}}
-        <p>{{repo.description}}</p>
+  <center>
+    <div id="background">
+      <form ng-submit="submit()">
+        <input type="text" name="text" ng-model="query" placeholder="Tell me a Github username">
+        <input type="submit" value="" id="goButton">
+      </form>
+      <pre>{{list}}</pre>
+    </div>
+  </center>
+
+  <div id="result">
+    <div id="user-info">
+      <img src="https://secure.gravatar.com/avatar/{{imgSrc}}?s=200">
+
+      <div id="info">
+        <div id="name">{{name}}</div>
+        <div>
+          <span ng-switch="emailPresent">
+            <span ng-switch-when="true">{{email}}</span>
+          </span>
+          <span ng-switch="bullPresent">
+            <span ng-switch-when="true">&bull;</span>
+          </span>
+          <span ng-switch="locPresent">
+            <span ng-switch-when="true">{{loc}}</span>
+          </span>
+        </div>
       </div>
     </div>
+    <div id="skills">
+      <div id="title">Skills rating</div>
+      <div id="ratings">
+        <div ng-repeat="skill in skills">
+
+          <span id="skill-name">{{skill[0]}}</span>&nbsp;
+          <span>{{skill[1]}}</span>
+
+        </div>
+      </div>
+    </div>
+    <h1>Some repositories</h1>
+    <div id="repo" ng-repeat="repo in repos | orderBy:score">
+      <div id="title"><a href="{{repo.html_url}}">{{repo.name}}</a></div>
+      <p>{{repo.description}}</p>
+
+      <div id="footer">
+        <span>Contributors {{repo.contributors_count}} </span>&bull;
+        <span>Collaborators {{repo.collaborators_count}} </span>&bull;
+        <span>Watchers {{repo.watchers_count}} </span>&bull;
+        <span>Forks {{repo.forks_count}} </span>&bull;
+        <span>Language {{repo.language}} </span>
+        <!--<span>Score {{repo.score}} </span>-->
+      </div>
+    </div>
+
+
   </div>
 </div>

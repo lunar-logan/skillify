@@ -1,17 +1,158 @@
 @mixin block($bkgrnd, $width) {
+  font-family: 'Josefin Slab', serif;
   background: $bkgrnd;
-  padding: 8px;
+//padding: 8px;
   width: $width;
-  border: solid 1px darken($bkgrnd, 80%);
-  border-radius: 4px;
-  margin-bottom: 8px;
+//border-bottom: solid 1px darken($bkgrnd, 60%);
+//border-radius: 4px;
+//margin-bottom: 4px;
+//word-break: break-all;
+  word-wrap: break-word;
 }
-#result {
-  background: #121212;
+
+@mixin emphasisBlock($bkgrndColor, $color) {
+  background: $bkgrndColor;
   padding: 8px;
+  position: relative;
+  color: $color;
+}
+
+@mixin textBlock($width) {
+  background: #b9b9b9;
+  width: $width;
+  border: none;
+  padding: 8px;
+}
+
+@mixin button($width) {
+  background: #1577ba;
+  width: $width;
+  border: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: inline-block;
+
+}
+
+body {
+  background: #232323;
+  //background: #0c0c0c;
+}
+#skills {
+  @include block(#0c0c0c, 720px);
+  opacity: 0.8;
+  margin-top: -1px;
+  color: #b9b9b9;
+  margin-left:auto;
+  margin-right:auto;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+#skills #title {
+  color: #6a6a66;
+  font-family: 'Josefin Slab', serif;
+  font-size: 32px;
+  padding: 8px;
+}
+
+#skills #ratings {
+  padding: 16px;
+}
+#skills #ratings #skill-name {
+  min-width: 120px;
+  background: #1577ba;
+}
+#user-info {
+  background: #000000;
+  opacity: 0.8;
+  width: 704px;
+  color: #6a6a66;
+  font-family: 'Josefin Slab', serif;
+  margin-left: -1px;
+  border-bottom: solid 1px #41413e;
+  //-moz-border-radius-topleft: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+#user-info img {
+  float: left;
+}
+
+#user-info #info {
+  float: right;
+  width: 500px;
+  //background: #404040;
+}
+
+#user-info #info #name {
+  font-size: 32px;
+}
+
+#background {
+  background: #404040;
+  padding: 8px;
+
+  width: 720px;
+}
+
+#background input[type='text'] {
+  @include textBlock(560px);
+
+}
+
+#background #goButton {
+  @include button(60px);
+  background-image: url("search.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin-left: -4px;
+}
+
+#result {
+  background: #404040;
+  padding: 8px;
+  width: 720px;
+  margin-left:auto;
+  margin-right:auto;
+  box-shadow: 0px 0px 12px #161616 ;
+}
+
+#result h1 {
+  color: #6a6a66;
+  font-family: 'Josefin Slab', serif;
 }
 #repo {
-  //background: #2e2e2e
-  @include block(#2e2e2e, 640px);
+  //background: #282828
+  @include block(#282828, 720px);
   color: #c6c5bb;
+  margin-bottom: 4px;
+}
+
+#repo #title {
+  padding-left: 4px;
+  padding-top: 4px;
+  font-size: 32px;
+  color: #e8210e;
+}
+
+a {
+  @extend #title;
+  text-decoration: none;
+  color: #e8210e;
+}
+
+a:hover {
+  @extend #title;
+  text-decoration: underline;
+}
+
+#repo p {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+#repo #footer {
+  @include emphasisBlock(#171713, #6a6a66);
 }
