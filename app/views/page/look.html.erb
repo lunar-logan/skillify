@@ -6,8 +6,8 @@
   <pre>{{list}}</pre>
   <div id="results">
     {{res}}
-    <div>
-      <div ng-repeat="repo in repos | orderBy:score">
+    <div id=result>
+      <div id="repo" ng-repeat="repo in repos | orderBy:score">
         {{repo.name}}
         <p>{{repo.description}}</p>
       </div>

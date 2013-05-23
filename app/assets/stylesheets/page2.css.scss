@@ -1,0 +1,17 @@
+@mixin block($bkgrnd, $width) {
+  background: $bkgrnd;
+  padding: 8px;
+  width: $width;
+  border: solid 1px darken($bkgrnd, 80%);
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+#result {
+  background: #121212;
+  padding: 8px;
+}
+#repo {
+  //background: #2e2e2e
+  @include block(#2e2e2e, 640px);
+  color: #c6c5bb;
+}
