@@ -1,0 +1,31 @@
+{
+    "key": ["skills", "user", "top_repos"],
+    "key_description": {
+        "skills": {
+            "type": "list",
+            "length": "dynamic",
+            "element": {
+                "type": "list",
+                "length": 2
+            }
+
+        },
+        "user": {
+            "type": "dict",
+            "attributes": ["username", "public_repos", "public_gists", "followers", "gravatar_id", "name", "location", "email"]
+        },
+        "top_repos": {
+            "type": "list",
+            "length": "dynamic",
+            "element": {
+                "type": "dict",
+                "attributes": ["name", "html_url", "description",
+                    "homepage", "watchers_count", "commits_count",
+                    "collaborators_count", "contributors_count",
+                    "score", "forks_count", "language" ]
+            }
+
+        }
+
+    }
+}
