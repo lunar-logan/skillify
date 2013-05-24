@@ -5,12 +5,14 @@ function queryController($scope, $http) {
 //    $scope.res = '';
     $scope.repos = null;
     $scope.skills = null;
+    $scope.queryPresent = false;
 //    $scope.n = '';
     $scope.submit = function () {
         if (this.query) {
             var queryString = this.query;
             $scope.list.push(this.query);
             this.query = '';
+            $scope.queryPresent = true;
             $http.get('/skillify.json?uname=' + queryString).then(function (res) {
                 if (res["status"] == 200) {
 //                    $scope.res="Found !!";

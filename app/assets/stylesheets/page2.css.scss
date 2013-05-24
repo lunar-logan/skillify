@@ -18,7 +18,7 @@
 }
 
 @mixin textBlock($width) {
-  background: #b9b9b9;
+  background: #686868;
   width: $width;
   border: none;
   padding: 8px;
@@ -31,7 +31,6 @@
   padding-top: 8px;
   padding-bottom: 8px;
   display: inline-block;
-
 }
 
 body {
@@ -101,6 +100,14 @@ body {
   @include textBlock(560px);
 
 }
+#background input[type='text']:hover {
+  //@include textBlock(560px);
+  background: #7a7a7a;
+}
+#background input[type='text']:focus{
+  //@include textBlock(560px);
+   background: #b5b5b5;
+}
 
 #background #goButton {
   @include button(60px);
@@ -108,6 +115,19 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   margin-left: -4px;
+  cursor: pointer;
+}
+#background #goButton:hover {
+  background: #138ec7;
+  background-image: url("search.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+#background #goButton:active {
+  background:  #165894;
+  background-image: url("search.png");
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 #result {
